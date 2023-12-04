@@ -8,6 +8,12 @@ public class Driver {
         lot.parkCar();
         lot.parkCar(); // Parking 2nd car
         // D Driver unparks their car to go home
-        lot.unparkCar();
+
+        Car car1 = new Car("ABC123");
+        Car car2 = new Car("XYZ789");
+
+        lot.parkCarByAttendant(car1);
+        lot.parkCarByAttendant(car2);
+       // lot.unparkCar();
     }
 }

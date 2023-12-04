@@ -26,6 +26,18 @@ class ParkingLot {
         }
     }
 
+    public boolean parkCarByAttendant(Car car) {
+        if (occupiedSpaces < capacity) {
+            occupiedSpaces++;
+            System.out.println("Attendant parked car with license plate " + car.getLicensePlate() +
+                    ". Occupied spaces: " + occupiedSpaces);
+            return true;
+        } else {
+            System.out.println("Parking lot is full, attendant cannot park more cars!");
+            return false;
+        }
+    }
+
     private void notifyOwnerParkingFull() {
         System.out.println("Parking lot is now full. Put out the full sign!");
     }

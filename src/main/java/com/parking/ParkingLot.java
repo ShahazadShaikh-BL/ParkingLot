@@ -1,14 +1,12 @@
 package com.parking;
-
+// Parking Lot Class
 class ParkingLot {
     private int capacity;
     private int occupiedSpaces;
-
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.occupiedSpaces = 0;
     }
-
     public boolean parkCar() {
         if (occupiedSpaces < capacity) {
             occupiedSpaces++;
@@ -28,7 +26,6 @@ class ParkingLot {
             System.out.println("Parking lot is already empty!");
         }
     }
-
     public int getAvailableSpaces() {
         return capacity - occupiedSpaces;
     }

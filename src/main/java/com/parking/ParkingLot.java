@@ -3,19 +3,20 @@ package com.parking;
 class ParkingLot {
     private int capacity;
     private int occupiedSpaces;
-    private boolean securityNotified;
+    private boolean isFull;
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.occupiedSpaces = 0;
-        this.securityNotified = false;
+        this.isFull = false;
     }
     public boolean parkCar() {
         if (occupiedSpaces < capacity) {
             occupiedSpaces++;
             System.out.println("Car parked successfully. Occupied spaces: " + occupiedSpaces);
 
-            if (occupiedSpaces == capacity && !securityNotified) {
-                notifySecurity();
+            if (occupiedSpaces == capacity && !isFull) {
+                notifyOwnerParkingFull();
+                isFull = true;
             }
 
             return true;
@@ -25,9 +26,8 @@ class ParkingLot {
         }
     }
 
-    private void notifySecurity() {
-        System.out.println("Parking lot is now full. Notify security for redirection of staff.");
-        securityNotified = true;
+    private void notifyOwnerParkingFull() {
+        System.out.println("Parking lot is now full. Put out the full sign!");
     }
 
     public void unparkCar() {
@@ -35,17 +35,17 @@ class ParkingLot {
             occupiedSpaces--;
             System.out.println("Car unparked successfully. Occupied spaces: " + occupiedSpaces);
 
-            if (occupiedSpaces < capacity && securityNotified) {
-                resetSecurityNotification();
+            if (occupiedSpaces < capacity && isFull) {
+                notifyOwnerSpaceAvailable();
+                isFull = false;
             }
         } else {
             System.out.println("Parking lot is already empty!");
         }
     }
 
-    private void resetSecurityNotification() {
-        System.out.println("Parking lot is no longer full. Reset security notification.");
-        securityNotified = false;
+    private void notifyOwnerSpaceAvailable() {
+        System.out.println("Parking lot has space available again. Take in the full sign.");
     }
 
 

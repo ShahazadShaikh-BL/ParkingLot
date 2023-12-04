@@ -1,24 +1,22 @@
 package com.parking;
+
+import java.util.Map;
+
 // Parking Lot Class
 class ParkingLot {
     private int capacity;
     private int occupiedSpaces;
-    private boolean isFull;
+    private Map<Integer, Car> parkedCars;
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.occupiedSpaces = 0;
-        this.isFull = false;
+
     }
-    public boolean parkCar() {
+    public boolean parkCar(Car car) {
         if (occupiedSpaces < capacity) {
             occupiedSpaces++;
-            System.out.println("Car parked successfully. Occupied spaces: " + occupiedSpaces);
-
-            if (occupiedSpaces == capacity && !isFull) {
-                notifyOwnerParkingFull();
-                isFull = true;
-            }
-
+            parkedCars.put(occupiedSpaces, car);
+            System.out.println("Car with license plate " + car.getLicensePlate() + " parked successfully. Occupied spaces: " + occupiedSpaces);
             return true;
         } else {
             System.out.println("Parking lot is full!");
@@ -38,28 +36,25 @@ class ParkingLot {
         }
     }
 
-    private void notifyOwnerParkingFull() {
-        System.out.println("Parking lot is now full. Put out the full sign!");
-    }
 
-    public void unparkCar() {
-        if (occupiedSpaces > 0) {
+
+    public void unparkCar(int spotNumber) {
+        if (occupiedSpaces > 0 && parkedCars.containsKey(spotNumber)) {
+            parkedCars.remove(spotNumber);
             occupiedSpaces--;
-            System.out.println("Car unparked successfully. Occupied spaces: " + occupiedSpaces);
-
-            if (occupiedSpaces < capacity && isFull) {
-                notifyOwnerSpaceAvailable();
-                isFull = false;
-            }
+            System.out.println("Car from spot " + spotNumber + " unparked successfully. Occupied spaces: " + occupiedSpaces);
         } else {
-            System.out.println("Parking lot is already empty!");
+            System.out.println("Parking spot is empty or car not found!");
         }
     }
-
-    private void notifyOwnerSpaceAvailable() {
-        System.out.println("Parking lot has space available again. Take in the full sign.");
+    public int findCarSpot(Car car) {
+        for (Map.Entry<Integer, Car> entry : parkedCars.entrySet()) {
+            if (entry.getValue().equals(car)) {
+                return entry.getKey();
+            }
+        }
+        return -1; // Car not found
     }
-
 
     public int getAvailableSpaces() {
         return capacity - occupiedSpaces;

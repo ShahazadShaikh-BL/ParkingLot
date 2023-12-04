@@ -11,6 +11,11 @@ class ParkingLot {
         if (occupiedSpaces < capacity) {
             occupiedSpaces++;
             System.out.println("Car parked successfully. Occupied spaces: " + occupiedSpaces);
+
+            if (occupiedSpaces == capacity) {
+                System.out.println("Parking lot is now full. Put out the full sign!");
+            }
+
             return true;
         } else {
             System.out.println("Parking lot is full!");

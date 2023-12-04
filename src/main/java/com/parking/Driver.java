@@ -6,6 +6,7 @@ public class Driver {
         ParkingLot lot = new ParkingLot(100);
         // Driver parks their car
         lot.parkCar();
+        lot.parkCar(); // Parking 2nd car
         // Driver unparks their car
         lot.unparkCar();
     }

@@ -7,6 +7,6 @@ public class Driver {
         // Driver parks their car
         lot.parkCar();
         // Driver unparks their car
-        lot.unparkCar();
+
     }
 }

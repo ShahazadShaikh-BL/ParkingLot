@@ -17,6 +17,14 @@ class ParkingLot {
             return false;
         }
     }
+    public void unparkCar() {
+        if (occupiedSpaces > 0) {
+            occupiedSpaces--;
+            System.out.println("Car unparked successfully. Occupied spaces: " + occupiedSpaces);
+        } else {
+            System.out.println("Parking lot is already empty!");
+        }
+    }
 
 
     public int getAvailableSpaces() {
